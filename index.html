@@ -64,6 +64,60 @@
       color: var(--muted); text-decoration: none; font-size: .96rem; transition: .2s ease;
     }
     .nav-links a:hover { color: white; }
+    .theme-toggle {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.08);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    body.light {
+      --bg: #eef4fb;
+      --bg2: #f9fbfe;
+      --card: rgba(255,255,255,0.82);
+      --line: rgba(15,23,42,0.08);
+      --text: #0f172a;
+      --muted: #42556f;
+      --shadow: 0 16px 45px rgba(15,23,42,.08);
+    }
+    body.light .nav {
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(15,23,42,.06);
+    }
+    body.light .nav-links a,
+    body.light footer,
+    body.light .hero-copy p,
+    body.light .section-head p,
+    body.light .service p,
+    body.light .project p,
+    body.light .about-card p,
+    body.light .contact-card p,
+    body.light .stat span,
+    body.light .mini span,
+    body.light .list-item span:first-child {
+      color: var(--muted);
+    }
+    body.light .theme-toggle,
+    body.light .btn-secondary,
+    body.light .contact-link,
+    body.light .chip,
+    body.light .list-item,
+    body.light .service,
+    body.light .project,
+    body.light .about-card,
+    body.light .contact-card,
+    body.light .stat,
+    body.light .mini {
+      border-color: rgba(15,23,42,.08);
+    }
+    body.light .hero-overlay,
+    body.light .slide::after {
+      background: linear-gradient(90deg, rgba(255,255,255,.58), rgba(255,255,255,.1) 55%, rgba(255,255,255,.22));
+    }
+    body.light .slide-caption p { color: #18324e; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       border: 0; border-radius: 999px; text-decoration: none; cursor: pointer;
@@ -265,6 +319,7 @@
         <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle light and dark mode">🌙</button>
       </div>
     </div>
   </nav>
@@ -285,7 +340,9 @@
           <div class="stats">
             <div class="stat"><strong>100+</strong><span>WordPress themes delivered</span></div>
             <div class="stat"><strong>20+</strong><span>Custom plugins developed</span></div>
-            <
+            <div class="stat"><strong>8+</strong><span>Years of professional experience</span></div>
+          </div>
+        </div>
         <div class="glass hero-media reveal">
           <img src="profile.jpeg" alt="Nadim Hossen" loading="eager" />
           <div class="hero-overlay"></div>
@@ -398,13 +455,14 @@
           <div class="about-card reveal">
             <h3>Nadim Hossen</h3>
             <p>
-              I am a WordPress Team Leader with strong real-world experience in custom plugin development, API integration, payment gateway implementation, bug fixing, and business website customization. I focus on solutions that are practical, scalable, and fast.
+              I am an experienced WordPress Team Leader and developer with strong hands-on expertise in custom plugin development, API integration, payment gateway implementation, bug fixing, theme customization, and scalable business website solutions. I also work with PHP, JavaScript, CSS, CodeIgniter, Shopify, and MySQL-driven systems.
             </p>
             <div class="list">
-              <div class="list-item"><span>Current Role</span><strong>Team Leader, WordPress</strong></div>
-              <div class="list-item"><span>Core Skills</span><strong>Plugin, API, Payment, Bug Fix</strong></div>
-              <div class="list-item"><span>Experience</span><strong>8+ Years</strong></div>
-              <div class="list-item"><span>Project Exposure</span><strong>100+ Themes, 20+ Plugins</strong></div>
+              <div class="list-item"><span>Current Role</span><strong>Team Leader (WordPress), Encoder IT Limited</strong></div>
+              <div class="list-item"><span>Previous Role</span><strong>Software Developer, Nesh Media BD</strong></div>
+              <div class="list-item"><span>Core Skills</span><strong>Plugin, API, Payment, PHP, CodeIgniter</strong></div>
+              <div class="list-item"><span>Project Exposure</span><strong>100+ Themes, 20+ Plugins, Shopify</strong></div>
+              <div class="list-item"><span>Education</span><strong>B.Sc. in CSE, University of Asia Pacific</strong></div>
             </div>
           </div>
         </div>
@@ -419,15 +477,15 @@
             Need a clean WordPress solution, custom plugin, API integration, payment system, or ongoing technical support? I’m available for freelance and project-based work.
           </p>
           <div class="contact-links">
-            <a class="contact-link" href="mailto:azad@getco-telecom.com">Email Me</a>
-            <a class="contact-link" href="#">Add WhatsApp</a>
-            <a class="contact-link" href="#">Add LinkedIn</a>
+            <a class="contact-link" href="mailto:nadimhossen5@gmail.com">nadimhossen5@gmail.com</a>
+            <a class="contact-link" href="tel:+8801744910825">01744910825</a>
+            <a class="contact-link" href="https://www.linkedin.com/in/nadim-hossen-7b6843171/" target="_blank" rel="noopener">LinkedIn Profile</a>
           </div>
         </div>
         <div class="contact-card reveal">
           <h3>Fast Loading Notes</h3>
           <p>
-            This portfolio is designed to stay light: no heavy framework, no giant animation library, lazy-loaded images, small custom slider code, and minimal JavaScript. That keeps it modern and fast at the same time.
+            This portfolio is designed to stay light: no heavy framework, no giant animation library, lazy-loaded images, small custom slider code, and minimal JavaScript. It now also includes light and dark mode without sacrificing speed.
           </p>
         </div>
       </div>
@@ -439,6 +497,19 @@
   </footer>
 
   <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light');
+      themeToggle.textContent = '☀️';
+    }
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      const isLight = document.body.classList.contains('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeToggle.textContent = isLight ? '☀️' : '🌙';
+    });
+
     const loader = document.getElementById('loader');
     window.addEventListener('load', () => setTimeout(() => loader.classList.add('hide'), 350));
 
