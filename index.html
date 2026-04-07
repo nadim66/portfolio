@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nadim Hossen — WordPress Plugin & API Developer</title>
+  <title>Nadim Hossen — WordPress, OpenCart & Custom Web Solutions</title>
   <style>
     :root {
       --bg: #08111f;
       --bg2: #0d1b2f;
       --card: rgba(255,255,255,0.08);
-      --line: rgba(255,255,255,0.1);
+      --line: rgba(255,255,255,0.10);
       --text: #f5f7fb;
       --muted: #c7d3e3;
       --accent: #4ade80;
@@ -33,8 +33,11 @@
     }
 
     .loader {
-      position: fixed; inset: 0; z-index: 9999;
-      display: grid; place-items: center;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
       background: linear-gradient(180deg, #07111d, #0d1b2f);
       transition: opacity .45s ease, visibility .45s ease;
     }
@@ -44,7 +47,9 @@
     .loader-box { text-align: center; }
 
     .loader-ring {
-      width: 70px; height: 70px; margin: 0 auto 18px;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
       border-radius: 50%;
       border: 4px solid rgba(255,255,255,.12);
       border-top-color: var(--accent2);
@@ -124,7 +129,7 @@
     body.light {
       --bg: #eef4fb;
       --bg2: #f9fbfe;
-      --card: rgba(255,255,255,0.82);
+      --card: rgba(255,255,255,0.84);
       --line: rgba(15,23,42,0.08);
       --text: #0f172a;
       --muted: #42556f;
@@ -132,7 +137,7 @@
     }
 
     body.light .nav {
-      background: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.75);
       border-bottom: 1px solid rgba(15,23,42,.06);
     }
 
@@ -141,61 +146,44 @@
     body.light .hero-copy p,
     body.light .section-head p,
     body.light .service p,
-    body.light .project p,
+    body.light .project-card p,
     body.light .about-card p,
     body.light .contact-card p,
     body.light .stat span,
-    body.light .mini span,
     body.light .list-item span:first-child {
       color: var(--muted);
     }
-body.light .mini span,body.light .mini {
-      color: #fff;
 
-}
     body.light .theme-toggle,
     body.light .btn-secondary,
-    body.light .contact-link,
     body.light .chip,
     body.light .list-item,
     body.light .service,
-    body.light .project,
+    body.light .project-card,
     body.light .about-card,
     body.light .contact-card,
     body.light .stat,
-    body.light .mini {
+    body.light .mini,
+    body.light .project-link {
       border-color: rgba(15,23,42,.08);
     }
 
-    body.light .hero-overlay,
+    body.light .hero-overlay {
+      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.04) 48%, rgba(255,255,255,.16));
+    }
+
     body.light .slide::after {
-      background: linear-gradient(90deg, rgba(255,255,255,.58), rgba(255,255,255,.1) 55%, rgba(255,255,255,.22));
+      background: linear-gradient(90deg, rgba(255,255,255,.38), rgba(255,255,255,.08) 55%, rgba(255,255,255,.20));
     }
 
-    body.light .slide-caption h3 {
-      color: #0f172a;
-    }
+    body.light .slide-caption h3 { color: #0f172a; }
+    body.light .slide-caption p { color: #18324e; }
 
-    body.light .slide-caption p {
-      color: #18324e;
-    }
-
-    body.light .btn-secondary {
-      background: rgba(15,23,42,.06);
+    body.light .btn-secondary,
+    body.light .project-link {
+      background: rgba(15,23,42,.05);
       color: #0f172a;
       border: 1px solid rgba(15,23,42,.10);
-    }
-
-    body.light .contact-link {
-      background: rgba(15,23,42,.05);
-      color: #0f172a;
-      border-color: rgba(15,23,42,.10);
-    }
-
-    body.light .chip {
-      background: rgba(15,23,42,.05);
-      color: #0f172a;
-      border-color: rgba(15,23,42,.10);
     }
 
     body.light .tag {
@@ -211,13 +199,18 @@ body.light .mini span,body.light .mini {
     }
 
     body.light .icon-btn {
-      background: rgba(255,255,255,.8);
+      background: rgba(255,255,255,.86);
       color: #0f172a;
       border-color: rgba(15,23,42,.10);
     }
 
-    body.light .btn-primary {
-      color: #07111d;
+    body.light .mini {
+      background: rgba(255,255,255,.78);
+      color: #0f172a;
+    }
+
+    body.light .mini span {
+      color: #42556f;
     }
 
     .btn {
@@ -337,6 +330,7 @@ body.light .mini span,body.light .mini {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
     }
 
@@ -408,14 +402,14 @@ body.light .mini span,body.light .mini {
 
     .slider {
       display: flex;
-      transition: transform .65s cubic-bezier(.2,.75,.2,1);
+      transition: transform .85s cubic-bezier(.2,.75,.2,1);
       will-change: transform;
     }
 
     .slide {
       min-width: 100%;
       position: relative;
-      aspect-ratio: 16 / 8.4;
+      aspect-ratio: 16 / 8.2;
       background: #08111f;
     }
 
@@ -423,28 +417,67 @@ body.light .mini span,body.light .mini {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
+      transform: scale(1.01);
     }
 
-    .slide::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(3,8,15,.72), rgba(3,8,15,.18) 55%, rgba(3,8,15,.42));
+   .slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3,8,15,.82), rgba(3,8,15,.40) 55%, rgba(3,8,15,.18));
+}
+
+.slide-caption {
+  position: absolute;
+  z-index: 2;
+  left: 34px;
+  bottom: 34px;
+  max-width: 560px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: rgba(7,17,29,.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 30px rgba(0,0,0,.22);
+}
+
+.slide-caption h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.45rem, 3vw, 2.4rem);
+  color: #ffffff;
+}
+
+.slide-caption p {
+  margin: 0;
+  color: #e8eef7;
+  line-height: 1.7;
+}
+
+    body.light .slide::after {
+      background: linear-gradient(90deg, rgba(15,23,42,.38), rgba(15,23,42,.16) 55%, rgba(15,23,42,.08));
     }
 
-    .slide-caption {
-      position: absolute;
-      z-index: 2;
-      left: 34px;
-      bottom: 34px;
-      max-width: 620px;
+    body.light .slide-caption {
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: 0 12px 28px rgba(15,23,42,.10);
+    }
+
+    body.light .slide-caption h3 {
+      color: #0f172a;
+    }
+
+    body.light .slide-caption p {
+      color: #334155;
     }
 
     .slide-caption h3 {
       margin: 0 0 10px;
       font-size: clamp(1.45rem, 3vw, 2.6rem);
-      color: var(--text);
+      color: #ffffff;
     }
 
     .slide-caption p {
@@ -491,7 +524,7 @@ body.light .mini span,body.light .mini {
     }
 
     .service.visible,
-    .project.visible,
+    .project-card.visible,
     .about-card.visible,
     .contact-card.visible {
       transform: translateY(0);
@@ -499,7 +532,7 @@ body.light .mini span,body.light .mini {
     }
 
     .service h3,
-    .project h3,
+    .project-card h3,
     .about-card h3,
     .contact-card h3 {
       margin: 0 0 10px;
@@ -507,7 +540,7 @@ body.light .mini span,body.light .mini {
     }
 
     .service p,
-    .project p,
+    .project-card p,
     .about-card p,
     .contact-card p {
       margin: 0;
@@ -527,14 +560,14 @@ body.light .mini span,body.light .mini {
       border: 1px solid rgba(255,255,255,.08);
     }
 
-    .projects-grid {
+    .projects-showcase {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .project {
-      padding: 24px;
+    .project-card {
+      padding: 20px;
       border-radius: 24px;
       background: var(--card);
       border: 1px solid var(--line);
@@ -544,13 +577,14 @@ body.light .mini span,body.light .mini {
       transition: .65s ease;
     }
 
-    .project img {
+    .project-thumb {
       width: 100%;
       aspect-ratio: 16/10;
       object-fit: cover;
       border-radius: 18px;
       margin-bottom: 18px;
       border: 1px solid rgba(255,255,255,.08);
+      display: block;
     }
 
     .chip-row {
@@ -558,6 +592,7 @@ body.light .mini span,body.light .mini {
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
+      margin-bottom: 18px;
     }
 
     .chip {
@@ -567,6 +602,24 @@ body.light .mini span,body.light .mini {
       border: 1px solid rgba(255,255,255,.08);
       color: var(--text);
       font-size: .9rem;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .project-link {
+      text-decoration: none;
+      color: var(--text);
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.09);
+      font-weight: 600;
+      font-size: .92rem;
     }
 
     .about-grid {
@@ -591,6 +644,7 @@ body.light .mini span,body.light .mini {
       width: 100%;
       aspect-ratio: 4/5;
       object-fit: cover;
+      object-position: center top;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.08);
     }
@@ -645,9 +699,9 @@ body.light .mini span,body.light .mini {
 
     @media (max-width: 980px) {
       .hero-grid,
-      .projects-grid,
       .about-grid,
-      .contact-grid {
+      .contact-grid,
+      .projects-showcase {
         grid-template-columns: 1fr;
       }
 
@@ -655,7 +709,13 @@ body.light .mini span,body.light .mini {
       .hero-copy { padding: 28px; }
       .hero-card { grid-template-columns: 1fr; }
       .slide { aspect-ratio: 4 / 5; }
-      .slide-caption { left: 20px; right: 20px; bottom: 24px; }
+      .slide-caption {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
+        padding: 16px;
+      }
       .stats { grid-template-columns: 1fr; }
     }
 
@@ -681,7 +741,7 @@ body.light .mini span,body.light .mini {
     <div class="nav-inner">
       <div class="brand">Nadim<span>.dev</span></div>
       <div class="nav-links">
-        <a href="#work">Work</a>
+        <a href="#portfolio">Portfolio</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -695,13 +755,13 @@ body.light .mini span,body.light .mini {
       <div class="container hero-grid">
         <div class="glass hero-copy reveal">
           <div class="tag">WordPress Team Leader • 8+ Years Experience</div>
-          <h1>WordPress, Plugin, API & Payment Solutions</h1>
+          <h1>WordPress, OpenCart & Custom Business Web Solutions</h1>
           <p>
-            I build custom WordPress plugins, API integrations, payment gateway solutions, and fast business websites with clean architecture, secure code, and performance-first design. My background includes WordPress, PHP, JavaScript, CSS, CodeIgniter, Shopify, REST APIs, and MySQL-based business solutions.
+            I develop and maintain business-focused web solutions across WordPress and OpenCart, covering custom plugins, theme customization, API integration, payment gateways, bug fixing, performance improvement, and long-term technical support.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Let’s Work Together</a>
-            <a class="btn btn-secondary" href="#work">View Portfolio</a>
+            <a class="btn btn-secondary" href="#portfolio">View Projects</a>
           </div>
           <div class="stats">
             <div class="stat"><strong>100+</strong><span>WordPress themes delivered</span></div>
@@ -714,40 +774,54 @@ body.light .mini span,body.light .mini {
           <img src="profile.jpeg" alt="Nadim Hossen" loading="eager" />
           <div class="hero-overlay"></div>
           <div class="hero-card">
-            <div class="mini">Plugin<span>Custom development</span></div>
-            <div class="mini">API<span>Third-party integration</span></div>
-            <div class="mini">Payment<span>Secure checkout flow</span></div>
+            <div class="mini">WordPress<span>Custom websites & support</span></div>
+            <div class="mini">OpenCart<span>Store setup & updates</span></div>
+            <div class="mini">Integrations<span>Plugins, APIs & payments</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="work">
+    <section class="section" id="portfolio">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Featured Work Showcase</h2>
+            <h2>Project Highlights</h2>
           </div>
           <p>
-            I used your banner visuals here as a modern slider section. It stays lightweight, touch-friendly, and much faster than heavy slider libraries.
+            A selection of recent work covering custom-coded business websites, private dashboard systems, integration work, and performance-focused implementation.
           </p>
         </div>
 
-        <div class="slider-wrap reveal">
+        <div class="slider-wrap reveal" id="sliderWrap">
           <div class="slider" id="slider">
             <article class="slide">
-              <img src="banner2.png" alt="WordPress developer showcase banner" loading="lazy" />
+              <img src="printparis-home.png" alt="Print Paris website screenshot" loading="lazy" />
               <div class="slide-caption">
-                <h3>Professional WordPress Theme Development</h3>
-                <p>Clean personal branding focused on theme,bug fixing, plugin development, API integration, and payment solutions.</p>
+                <h3>Print Paris — Custom-Coded Printing Website</h3>
+                <p>
+                  Performance-first implementation using Tailwind CSS and a lean custom structure for fast loading, clean browsing, and efficient front-end delivery without heavy plugin dependency.
+                </p>
               </div>
             </article>
 
             <article class="slide">
-              <img src="banner22.png" alt="Plugin developer showcase banner" loading="lazy" />
+              <img src="shahrestaurant-home.png" alt="Shah Restaurant Paris website screenshot" loading="lazy" />
               <div class="slide-caption">
-                <h3>Custom Plugin & API Integration Expertise</h3>
-                <p>Built for clients who need scalable custom plugin systems, external API connections, and modern WordPress engineering.</p>
+                <h3>Shah Restaurant Paris — Business Website</h3>
+                <p>
+                  Clean presentation-focused website built for a restaurant brand, with an optimized custom layout and straightforward user experience.
+                </p>
+              </div>
+            </article>
+
+            <article class="slide">
+              <img src="finance-dashboard.png" alt="Private finance dashboard screenshot" loading="lazy" />
+              <div class="slide-caption">
+                <h3>Private Finance & Inventory Dashboard</h3>
+                <p>
+                  Internal dashboard for sales, purchases, expenses, banking, invoices, employer management, and reporting in a business operations environment.
+                </p>
               </div>
             </article>
           </div>
@@ -760,56 +834,90 @@ body.light .mini span,body.light .mini {
       </div>
     </section>
 
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head reveal">
-          <div><h2>What I Do</h2></div>
-          <p>I focus on practical solutions that help businesses launch faster, work more smoothly, and scale with confidence.</p>
+    <section class="section">
+      <div class="container projects-showcase">
+        <div class="project-card reveal">
+          <img class="project-thumb" src="printparis-home.png" alt="Print Paris homepage preview" loading="lazy" />
+          <h3>Print Paris</h3>
+          <p>
+            A public-facing printing platform developed with a lightweight custom approach. The focus was fast loading, optimized code structure, and practical browsing flow for production use.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Tailwind CSS</span>
+            <span class="chip">Custom Coded</span>
+            <span class="chip">Performance Focus</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="https://printparis-imprimerie.com/" target="_blank" rel="noopener">Visit Website</a>
+          </div>
         </div>
 
-        <div class="grid-3">
-          <div class="service reveal">
-            <div class="service-icon">⚙️</div>
-            <h3>Custom Plugin Development</h3>
-            <p>I develop WordPress plugins tailored to your workflow, from admin tools to advanced business logic and feature-rich product modules.</p>
+        <div class="project-card reveal">
+          <img class="project-thumb" src="shahrestaurant-home.png" alt="Shah Restaurant website preview" loading="lazy" />
+          <h3>Shah Restaurant Paris</h3>
+          <p>
+            Restaurant website work focused on presentation, clean layout, and business-ready structure. Designed to provide a straightforward and polished browsing experience.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Business Website</span>
+            <span class="chip">Custom Layout</span>
+            <span class="chip">Optimized Front End</span>
           </div>
-
-          <div class="service reveal">
-            <div class="service-icon">🔗</div>
-            <h3>API Integration</h3>
-            <p>I connect WordPress with third-party systems, REST APIs, CRMs, custom dashboards, and automation services in a clean and secure way.</p>
+          <div class="project-links">
+            <a class="project-link" href="https://shahrestaurantparis.com/" target="_blank" rel="noopener">Visit Website</a>
           </div>
+        </div>
 
-          <div class="service reveal">
-            <div class="service-icon">💳</div>
-            <h3>Payment Gateway Solutions</h3>
-            <p>I integrate and customize payment gateways like SSLCommerz, Stripe, and PayPal with secure validation and business-ready checkout flows.</p>
+        <div class="project-card reveal">
+          <img class="project-thumb" src="finance-dashboard.png" alt="Finance dashboard preview" loading="lazy" />
+          <h3>Finance & Inventory System</h3>
+          <p>
+            A private internal system built for operational management, covering sales tracking, purchases, expenses, bank transfers, invoices, and related dashboard reporting.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Private Project</span>
+            <span class="chip">Dashboard UI</span>
+            <span class="chip">Business Workflow</span>
+          </div>
+          <div class="project-links">
+        
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container projects-grid">
-        <div class="project reveal">
-          <img src="banner.png" alt="Project preview 1" loading="lazy" />
-          <h3>WordPress Development & Technical Support</h3>
-          <p>From bug fixing to performance tuning and advanced customization, I solve WordPress issues with a focus on stability, speed, and clean implementation.</p>
-          <div class="chip-row">
-            <span class="chip">Bug Fix</span>
-            <span class="chip">Theme Customization</span>
-            <span class="chip">Performance</span>
-          </div>
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Services</h2></div>
+          <p>
+            I work on both new builds and existing systems, helping businesses improve website functionality, integrations, and long-term technical stability.
+          </p>
         </div>
 
-        <div class="project reveal">
-          <img src="banner2.png" alt="Project preview 2" loading="lazy" />
-          <h3>API, Plugin & Payment Engineering</h3>
-          <p>Designed solutions for custom plugins, business APIs, and payment integrations with emphasis on reliability, maintainability, and secure transaction handling.</p>
-          <div class="chip-row">
-            <span class="chip">Custom Plugin</span>
-            <span class="chip">REST API</span>
-            <span class="chip">Stripe / PayPal / SSLCommerz</span>
+        <div class="grid-3">
+          <div class="service reveal">
+            <div class="service-icon">🧩</div>
+            <h3>WordPress & OpenCart Development</h3>
+            <p>
+              Custom website development, store customization, CMS enhancements, and platform-specific improvements for business and eCommerce projects.
+            </p>
+          </div>
+
+          <div class="service reveal">
+            <div class="service-icon">⚙️</div>
+            <h3>Plugins, Themes & API Integration</h3>
+            <p>
+              Custom plugins, theme customization, third-party API connection, business feature development, and implementation tailored to project requirements.
+            </p>
+          </div>
+
+          <div class="service reveal">
+            <div class="service-icon">💳</div>
+            <h3>Bug Fixing, Payments & Maintenance</h3>
+            <p>
+              Technical troubleshooting, payment gateway integration, performance improvements, code refinement, and ongoing support for live production websites.
+            </p>
           </div>
         </div>
       </div>
@@ -819,7 +927,9 @@ body.light .mini span,body.light .mini {
       <div class="container">
         <div class="section-head reveal">
           <div><h2>About Me</h2></div>
-          <p>Experienced WordPress professional with leadership background and hands-on development across plugins, APIs, themes, and payment systems.</p>
+          <p>
+            Web developer and team leader with hands-on experience in delivery, customization, integration, and support across WordPress, OpenCart, and business-focused web systems.
+          </p>
         </div>
 
         <div class="about-grid">
@@ -830,14 +940,15 @@ body.light .mini span,body.light .mini {
           <div class="about-card reveal">
             <h3>Nadim Hossen</h3>
             <p>
-              I am an experienced WordPress Team Leader and developer with strong hands-on expertise in custom plugin development, API integration, payment gateway implementation, bug fixing, theme customization, and scalable business website solutions. I also work with PHP, JavaScript, CSS, CodeIgniter, Shopify,Opencart and MySQL-driven systems.
+              I am a WordPress Team Leader and developer with practical experience in WordPress and OpenCart development, custom plugin work, theme customization, API integration, payment gateway implementation, bug fixing, and technical maintenance. My work focuses on stable delivery, performance-aware coding, and solutions that support real business operations.
             </p>
 
             <div class="list">
               <div class="list-item"><span>Current Role</span><strong>Team Leader (WordPress), Encoder IT Limited</strong></div>
               <div class="list-item"><span>Previous Role</span><strong>Software Developer, Nesh Media BD</strong></div>
-              <div class="list-item"><span>Core Skills</span><strong>Theme, Plugin, API, Payment, PHP, Opencart, CodeIgniter</strong></div>
-              <div class="list-item"><span>Project Exposure</span><strong>100+ Themes, 20+ Plugins, Shopify</strong></div>
+              <div class="list-item"><span>Platform Focus</span><strong>WordPress, OpenCart, Custom CMS Solutions</strong></div>
+              <div class="list-item"><span>Core Work</span><strong>Plugins, Themes, APIs, Payments, Bug Fixing</strong></div>
+              <div class="list-item"><span>Tech Stack</span><strong>PHP, JavaScript, CSS, MySQL, CodeIgniter, Shopify</strong></div>
               <div class="list-item"><span>Education</span><strong>B.Sc. in CSE, University of Asia Pacific</strong></div>
             </div>
           </div>
@@ -848,9 +959,9 @@ body.light .mini span,body.light .mini {
     <section class="section" id="contact">
       <div class="container contact-grid">
         <div class="contact-card reveal">
-          <h3>Let’s Build Something Great</h3>
+          <h3>Let’s Work Together</h3>
           <p>
-            Need a clean WordPress solution, custom plugin, API integration, payment system, or ongoing technical support? I’m available for freelance and project-based work.
+            Available for WordPress and OpenCart development, plugin and theme customization, API integration, payment gateway implementation, bug fixing, and ongoing technical support.
           </p>
 
           <div class="contact-links">
@@ -862,17 +973,17 @@ body.light .mini span,body.light .mini {
         </div>
 
         <div class="contact-card reveal">
-         <h3>Technical Skills</h3>
-        <p>
-          Strong experience in WordPress development, custom plugin development, theme customization, API integration, payment gateway integration, PHP, JavaScript, CSS, MySQL, CodeIgniter, Shopify, and OpenCart CMS. I focus on building secure, scalable, and business-ready web solutions.
-        </p>
+          <h3>Professional Approach</h3>
+          <p>
+            I prefer clean implementation over unnecessary complexity. My focus is on maintainable code, stable delivery, and business-ready execution for both public websites and internal systems.
+          </p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    © 2026 Nadim Hossen — WordPress Plugin & API Developer
+    © 2026 Nadim Hossen — WordPress, OpenCart & Custom Web Solutions
   </footer>
 
   <script>
@@ -897,12 +1008,14 @@ body.light .mini span,body.light .mini {
     });
 
     const slider = document.getElementById('slider');
+    const sliderWrap = document.getElementById('sliderWrap');
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
     let current = 0;
-    let auto;
+    let auto = null;
+    const AUTO_DELAY = 6500;
 
     function goTo(index) {
       current = (index + slides.length) % slides.length;
@@ -918,11 +1031,12 @@ body.light .mini span,body.light .mini {
     }
 
     function startAuto() {
-      auto = setInterval(nextSlide, 3800);
+      stopAuto();
+      auto = setInterval(nextSlide, AUTO_DELAY);
     }
 
     function stopAuto() {
-      clearInterval(auto);
+      if (auto) clearInterval(auto);
     }
 
     nextBtn.addEventListener('click', () => {
@@ -937,17 +1051,26 @@ body.light .mini span,body.light .mini {
       startAuto();
     });
 
+    sliderWrap.addEventListener('mouseenter', stopAuto);
+    sliderWrap.addEventListener('mouseleave', startAuto);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAuto();
+      } else {
+        startAuto();
+      }
+    });
+
     startAuto();
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.14 });
 
-    document.querySelectorAll('.reveal, .service, .project, .about-card, .contact-card').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .service, .project-card, .about-card, .contact-card').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
